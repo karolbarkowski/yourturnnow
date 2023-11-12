@@ -23,6 +23,11 @@ namespace API
                     x.DefaultChallengeScheme = JwtBearerDefaults.AuthenticationScheme;
                     x.DefaultScheme = JwtBearerDefaults.AuthenticationScheme;
                 })
+                .AddGoogle(googleOptions =>
+                {
+                    googleOptions.ClientId = config["OauthSettings:Google:ClientId"];
+                    googleOptions.ClientSecret = config["OauthSettings:Google:ClientSecret"];
+                })
                 .AddJwtBearer(x =>
                 {
                     x.TokenValidationParameters = new Microsoft.IdentityModel.Tokens.TokenValidationParameters
