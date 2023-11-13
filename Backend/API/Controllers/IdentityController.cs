@@ -1,4 +1,6 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Google.Apis.Auth;
+using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
 using Microsoft.IdentityModel.Tokens;
 using System.IdentityModel.Tokens.Jwt;
 using System.Security.Claims;
@@ -41,6 +43,14 @@ namespace API.Controllers
             var jwt = tokenHandler.WriteToken(token);
 
             return Ok(jwt);
+        }
+
+        [HttpGet("token")]
+        [AllowAnonymous]
+        public async Task<IActionResult> ValidateGoogleToken(string token)
+        {
+            GoogleJsonWebSignature.Payload payload = await GoogleJsonWebSignature.ValidateAsync(token);
+            return Ok(payload);
         }
     }
 

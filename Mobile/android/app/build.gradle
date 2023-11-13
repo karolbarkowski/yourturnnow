@@ -1,5 +1,6 @@
 apply plugin: "com.android.application"
 apply plugin: "com.facebook.react"
+apply plugin: "com.android.application"
 
 /**
  * This is the configuration block to customize your React Native Android app.
@@ -83,10 +84,16 @@ android {
     }
     signingConfigs {
         debug {
-            storeFile file('debug.keystore')
-            storePassword 'android'
-            keyAlias 'androiddebugkey'
-            keyPassword 'android'
+            storeFile file(YOURTURNNOW_UPLOAD_STORE_FILE)
+            storePassword YOURTURNNOW_UPLOAD_STORE_PASSWORD
+            keyAlias YOURTURNNOW_UPLOAD_KEY_ALIAS
+            keyPassword YOURTURNNOW_UPLOAD_KEY_PASSWORD
+        }
+        release {
+            storeFile file(YOURTURNNOW_UPLOAD_STORE_FILE)
+            storePassword YOURTURNNOW_UPLOAD_STORE_PASSWORD
+            keyAlias YOURTURNNOW_UPLOAD_KEY_ALIAS
+            keyPassword YOURTURNNOW_UPLOAD_KEY_PASSWORD
         }
     }
     buildTypes {
@@ -106,7 +113,9 @@ android {
 dependencies {
     // The version of react-native is set by the React Native Gradle Plugin
     implementation("com.facebook.react:react-android")
-
+    implementation("com.google.android.gms:play-services-auth:20.0.0")
+    implementation("androidx.browser:browser:1.2.0")
+    
     debugImplementation("com.facebook.flipper:flipper:${FLIPPER_VERSION}")
     debugImplementation("com.facebook.flipper:flipper-network-plugin:${FLIPPER_VERSION}") {
         exclude group:'com.squareup.okhttp3', module:'okhttp'
